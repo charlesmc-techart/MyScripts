@@ -148,7 +148,8 @@ def main(dir: Path) -> None:
 
     xmp_files = []
     for source_dir in dir.iterdir():
-        if source_dir.name in SUBDIRECTORIES:
+        filename = source_dir.name
+        if filename in SUBDIRECTORIES or filename == ".DS_Store":
             continue
 
         file_ext = source_dir.suffix.lower()[1:]
