@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh -f
+
+readonly DIR=${0:A:h}
+
+cd $DIR && source ../../link.zsh
+
+readonly DIRNAME=${DIR:t}
+
+################################################################################
+
+src=./$DIRNAME.workflow
+symlink $src ${src/./"${LIBRARY_DIR}/Workflows/Applications/Folder Actions"}
+
+for src in ./*(.); do
+    [[ $src -ef ./install ]] && continue
+
+    symlink_config $src $DIRNAME
+done

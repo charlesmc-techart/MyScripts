@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh -f
+
+cd ${0:A:h} && source ../link.zsh
+
+################################################################################
+
+dir=~/.local/bin
+mkdir ~dir 2>/dev/null
+
+for src in ./*(x); do
+    if [[ $src -ef ./install ]]; then
+        continue
+    elif [[ -d $src ]]; then
+        $src/**/install
+    else
+        symlink $src ${src/./~dir}
+    fi
+done
