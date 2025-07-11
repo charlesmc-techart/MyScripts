@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh -f
+
+readonly DIR=${0:A:h}
+
+cd $DIR && source ../../link.zsh
+
+readonly DIRNAME=${DIR:t}
+
+################################################################################
+
+dir=~/.local/bin/$DIRNAME
+mkdir ~dir 2>/dev/null
+
+for src in ${DIRNAME}.py main; do
+    symlink ./$src ~dir/$src
+done
