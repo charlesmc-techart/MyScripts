@@ -1,3 +1,5 @@
+"""Functions for organizing the contents of a directory"""
+
 from pathlib import Path
 
 
