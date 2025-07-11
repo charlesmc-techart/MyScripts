@@ -52,7 +52,7 @@ CODE_PYTHON_DIR = Path(CODE_DIR, "Python")
 CODE_SHELL_DIR = Path(CODE_DIR, "Shell")
 IMAGES_RAW_DIR = Path(IMAGES_DIR, "Raws")
 
-# Keys are lowercase file extensions from `path.suffix.lower()[1:]`
+# The keys are lowercase file extensions
 TARGET_SUBDIRECTORY_PATHS = {
     # 3D
     "abc": THREE_D_DIR,
@@ -124,7 +124,7 @@ TARGET_SUBDIRECTORY_PATHS = {
 
 
 def move_file(file: Path, target_dir: Path) -> None:
-    """Create `target_dir` if it doesn't exist, then move `file` into it."""
+    """Move `file` into `target_dir`, creating `target_dir` as necessary."""
 
     if not target_dir.exists():
         target_dir.mkdir()
@@ -151,8 +151,6 @@ def main(dir: Path) -> None:
         if source_dir.name in SUBDIRECTORIES:
             continue
 
-        move_func = move_file
-
         file_ext = source_dir.suffix.lower()[1:]
         if file_ext == "xmp":
             xmp_files.append(source_dir)
@@ -161,6 +159,9 @@ def main(dir: Path) -> None:
         target_dir = TARGET_SUBDIRECTORY_PATHS.get(file_ext, MISC_DIR)
         if target_dir is IMAGES_DIR or target_dir is IMAGES_RAW_DIR:
             move_func = move_image
+
+        else:
+            move_func = move_file
 
         move_func(source_dir, dir / target_dir)
 
