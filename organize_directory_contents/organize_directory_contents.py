@@ -178,12 +178,10 @@ def main(root_dir: Path) -> None:
 
         target_dir = TARGET_SUBDIRECTORY_MAPPING.get(file_ext, MISC_DIR)
         if target_dir is IMAGES_DIR or target_dir is IMAGES_RAW_DIR:
-            move_func = move_image
+            move_image(file, root_dir / target_dir)
 
         else:
-            move_func = move_file
-
-        move_func(file, root_dir / target_dir)
+            move_file(file, root_dir / target_dir)
 
     for xmp_file in xmp_files:
         try:
