@@ -206,7 +206,7 @@ void move_image(const std::filesystem::path& image_file,
   const auto sidecar_file{
       std::filesystem::path{image_file}.replace_extension("xmp")};
   try {
-    std::filesystem::rename(sidecar_file, target_dir / sidecar_file.filename());
+    move_file(sidecar_file, target_dir);
   } catch (const std::filesystem::filesystem_error&) {
     // Do nothing if a sidecar file does not exist.
   }
