@@ -204,7 +204,7 @@ void move_image(const std::filesystem::path& image_file,
   move_file(image_file, target_dir);
 
   const auto sidecar_file{
-      std::filesystem::path{image_file}.replace_extension("xmp")};
+      const_cast<std::filesystem::path&>(image_file).replace_extension("xmp")};
   try {
     move_file(sidecar_file, target_dir);
   } catch (const std::filesystem::filesystem_error&) {
