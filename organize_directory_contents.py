@@ -29,6 +29,7 @@ Directory/
 
 import os.path
 from argparse import ArgumentParser
+from itertools import chain
 from pathlib import Path
 
 SUBDIRECTORIES = {
@@ -144,7 +145,21 @@ def move_image(image_file: Path, target_dir: Path) -> None:
 def main(root_dir: Path) -> None:
     """Organize the contents of `root_dir`."""
 
-    for subdir in SUBDIRECTORIES:
+    # This ensures that `SUBDIRECTORIES` are iterated over first, before the
+    # sub-subdirectories.
+    for subdir in chain(
+        SUBDIRECTORIES,
+        (
+            THREE_D_BLENDER_DIR,
+            THREE_D_MAYA_DIR,
+            CODE_ASSEMBLY_DIR,
+            CODE_C_CPP_DIR,
+            CODE_JAVASCRIPT_DIR,
+            CODE_PYTHON_DIR,
+            CODE_SHELL_DIR,
+            IMAGES_RAW_DIR,
+        ),
+    ):
         (root_dir / subdir).mkdir(exist_ok=True)
 
     # `move_image()` will move an image's existing sidecar file alongside the
