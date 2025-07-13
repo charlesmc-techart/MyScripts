@@ -159,14 +159,10 @@ int main(int, const char* argv[]) {
       continue;
     }
 
-    std::string file_ext{dir_path.extension()};
-    try {
-      file_ext = file_ext.substr(1);
-    } catch (const std::out_of_range&) {
-      // Do nothing if there is no file extension.
-    }
-
-    if (file_ext == "xmp") {
+    // Utilize short-circuiting by checking if the file extension is "xmp" only
+    // at the end.
+    auto file_ext{dir_path.extension().string()};
+    if (!file_ext.empty() && (file_ext = file_ext.substr(1)) == "xmp") {
       xmp_files.push_back(dir_path);
       continue;
     }

@@ -171,8 +171,11 @@ def main(root_dir: Path) -> None:
         if file.name in SUBDIRECTORIES or file.name == ".DS_Store":
             continue
 
-        file_ext = file.suffix[1:].lower()
-        if file_ext == "xmp":
+        # Utilize short-circuiting by checking if the file extension is "xmp"
+        # only at the end.
+        if (file_ext := file.suffix) and (
+            file_ext := file_ext[1:].lower()
+        ) == "xmp":
             xmp_files.append(file)
             continue
 
