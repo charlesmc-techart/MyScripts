@@ -170,7 +170,7 @@ def main(root_dir: Path) -> None:
         if file.name in SUBDIRECTORIES or file.name == ".DS_Store":
             continue
 
-        file_ext = file.suffix.lower()[1:]
+        file_ext = file.suffix[1:].lower()
         if file_ext == "xmp":
             xmp_files.append(file)
             continue
