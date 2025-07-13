@@ -27,10 +27,11 @@ Directory/
 |--Videos/
 """
 
+import os.path
 from argparse import ArgumentParser
 from pathlib import Path
 
-SUBDIRECTORIES: set[str | Path] = {
+SUBDIRECTORIES = {
     THREE_D_DIR := "3D",
     AUDIO_DIR := "Audio",
     ARCHIVES_DIR := "Archives",
@@ -39,19 +40,20 @@ SUBDIRECTORIES: set[str | Path] = {
     IMAGES_DIR := "Images",
     MISC_DIR := "Misc",
     VIDEOS_DIR := "Videos",
-    # Sub-subdirectories
-    THREE_D_BLENDER_DIR := Path(THREE_D_DIR, "Blender"),
-    THREE_D_MAYA_DIR := Path(THREE_D_DIR, "Maya"),
-    CODE_ASSEMBLY_DIR := Path(CODE_DIR, "Assembly"),
-    CODE_C_CPP_DIR := Path(CODE_DIR, "C_Cpp"),
-    CODE_JAVASCRIPT_DIR := Path(CODE_DIR, "Javascript"),
-    CODE_PYTHON_DIR := Path(CODE_DIR, "Python"),
-    CODE_SHELL_DIR := Path(CODE_DIR, "Shell"),
-    IMAGES_RAW_DIR := Path(IMAGES_DIR, "Raws"),
 }
 
+# Sub-subdirectories
+THREE_D_BLENDER_DIR = os.path.join(THREE_D_DIR, "Blender")
+THREE_D_MAYA_DIR = os.path.join(THREE_D_DIR, "Maya")
+CODE_ASSEMBLY_DIR = os.path.join(CODE_DIR, "Assembly")
+CODE_C_CPP_DIR = os.path.join(CODE_DIR, "C_Cpp")
+CODE_JAVASCRIPT_DIR = os.path.join(CODE_DIR, "Javascript")
+CODE_PYTHON_DIR = os.path.join(CODE_DIR, "Python")
+CODE_SHELL_DIR = os.path.join(CODE_DIR, "Shell")
+IMAGES_RAW_DIR = os.path.join(IMAGES_DIR, "Raws")
+
 # The keys are lowercase file extensions
-TARGET_SUBDIRECTORY_MAPPING: dict[str, str | Path] = {
+TARGET_SUBDIRECTORY_MAPPING = {
     # 3D
     "abc": THREE_D_DIR,
     "fbx": THREE_D_DIR,
