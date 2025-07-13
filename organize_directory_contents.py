@@ -32,16 +32,18 @@ from argparse import ArgumentParser
 from itertools import chain
 from pathlib import Path
 
-SUBDIRECTORIES = {
-    THREE_D_DIR := "3D",
-    AUDIO_DIR := "Audio",
-    ARCHIVES_DIR := "Archives",
-    CODE_DIR := "Code",
-    DOCUMENTS_DIR := "Documents",
-    IMAGES_DIR := "Images",
-    MISC_DIR := "Misc",
-    VIDEOS_DIR := "Videos",
-}
+SUBDIRECTORIES = frozenset(
+    {
+        THREE_D_DIR := "3D",
+        AUDIO_DIR := "Audio",
+        ARCHIVES_DIR := "Archives",
+        CODE_DIR := "Code",
+        DOCUMENTS_DIR := "Documents",
+        IMAGES_DIR := "Images",
+        MISC_DIR := "Misc",
+        VIDEOS_DIR := "Videos",
+    }
+)
 
 # Sub-subdirectories
 THREE_D_BLENDER_DIR = os.path.join(THREE_D_DIR, "Blender")
