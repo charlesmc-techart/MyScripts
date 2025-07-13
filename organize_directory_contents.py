@@ -145,7 +145,6 @@ def move_image(image_file: Path, target_dir: Path) -> None:
 
 
 def main(root_dir: Path) -> None:
-    """Organize the contents of `root_dir`."""
 
     # This ensures that `SUBDIRECTORIES` are iterated over first, before the
     # sub-subdirectories.
