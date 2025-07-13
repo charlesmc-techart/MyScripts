@@ -134,7 +134,7 @@ void move_image(const std::filesystem::path&, const std::filesystem::path&);
 
 // main
 
-int main(int, const char* argv[]) {
+int main(const int, const char* argv[]) {
   const std::filesystem::path root_dir{argv[1]};
 
   for (const auto& subdir : SUBDIRECTORIES) {
