@@ -26,7 +26,6 @@
 // |--Videos/
 
 #include <filesystem>
-#include <ranges>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
@@ -203,7 +202,7 @@ void move_image(const std::filesystem::path& image_file,
                 const std::filesystem::path& target_dir) {
   move_file(image_file, target_dir);
 
-  const auto sidecar_file{
+  const auto& sidecar_file{
       const_cast<std::filesystem::path&>(image_file).replace_extension("xmp")};
   try {
     move_file(sidecar_file, target_dir);
