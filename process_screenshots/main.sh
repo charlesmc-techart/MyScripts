@@ -8,7 +8,7 @@ setopt EXTENDED_GLOB
 readonly FILENAME_PATTERN='*2<-1><-9><-9>-<-1><-9>-<-3><-9>*<-2><-9>.<-5><-9>.<-5><-9>*.*(.)'
 readonly DIRNAME=${0:A:h:t}
 readonly PIPE=../$DIRNAME
-readonly TAG_FILES_DIR=~/.config/$DIRNAME
+readonly TAG_FILES_DIR=~/.config/exiftool
 
 ################################################################################
 
