@@ -10,16 +10,16 @@
 // |--Archives/
 // |
 // |--Code/
-// |    |--Assembly/
-// |    |--C_Cpp/
-// |    |--Javascript/
-// |    |--Python/
-// |    |--Shell/
+// |  |--Assembly/
+// |  |--C_Cpp/
+// |  |--Javascript/
+// |  |--Python/
+// |  |--Shell/
 // |
 // |--Documents/
 // |
 // |--Images/
-// |    |--Raw/
+// |  |--Raw/
 // |
 // |--Misc/
 // |
