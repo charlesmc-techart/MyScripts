@@ -26,6 +26,7 @@
 // |--Videos/
 
 #include <filesystem>
+#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
@@ -133,7 +134,12 @@ void move_image(const std::filesystem::path&, const std::filesystem::path&);
 
 // main
 
-int main(const int, const char* argv[]) {
+int main(const int argc, const char* argv[]) {
+  if (argc < 2) {
+    std::cerr << "Error: Must supply a directory\n";
+    return 1;
+  }
+
   const std::filesystem::path root_dir{argv[1]};
 
   for (const auto& subdir : SUBDIRECTORIES) {
