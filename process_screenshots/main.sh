@@ -63,8 +63,7 @@ readonly new_datetime_pattern="\${${orig_str_pattern}/\$1\$2-\$3-\$4T\$5:\$6:\$7
 
 readonly timezone="$(date +%z)"
 
-readonly search_str='Model Name:'
-readonly hardware="$(system_profiler SPHardwareDataType | grep "$search_str" | sed -E "s/ *${search_str} ?//")"
+readonly hardware="$(system_profiler SPHardwareDataType | sed -En 's/^.*Model Name: //p')"
 
 "$~HOMEBREW_DIR/exiftool" -P -struct         "-directory=$output_dir"\
     $~orig_filename_pattern                  "-Filename<$new_filename_pattern"\
