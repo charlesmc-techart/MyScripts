@@ -89,9 +89,10 @@ if __name__ == "__main__":
     parser = ArgumentParser(prog="Organize Directory", description=__doc__)
     parser.add_argument("dir", type=Path, help="the directory to organize")
     parser.add_argument(
+        "-c",
         "--config",
         type=Path,
-        help="a file containing mappings between file extension and its destination",
+        help="a map between file extension and its destination",
     )
     args = parser.parse_args()
 
