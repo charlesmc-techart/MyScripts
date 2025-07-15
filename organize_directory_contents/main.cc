@@ -12,10 +12,15 @@
 
 static const std::filesystem::path MISC_DIR{"Misc"};
 
-// Create a targets dictionary from a file.
+/// Create a targets map from a file.
+/// \param config_file the file containing the mapping
+/// \param out_dirs will contain all the unique directories
+/// \param out_targets will contain the map between a file extension and the
+/// corresponding file's destination
 void read_targets_from_file(
-    const std::filesystem::path&, std::unordered_set<std::filesystem::path>&,
-    std::unordered_map<std::string, std::filesystem::path>&);
+    const std::filesystem::path& config_file,
+    std::unordered_set<std::filesystem::path>& out_dirs,
+    std::unordered_map<std::string, std::filesystem::path>& out_targets);
 
 // Move `file` into `target_dir`.
 void move_file(const std::filesystem::path&, const std::filesystem::path&);
@@ -56,8 +61,6 @@ int main(const int argc, const char* argv[]) {
       continue;
     }
 
-    // Utilize short-circuiting by checking if the file extension is "xmp" only
-    // at the end.
     auto file_ext{dir_path.extension().string()};
     if (file_ext.empty()) {
       continue;
