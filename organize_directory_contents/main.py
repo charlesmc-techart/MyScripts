@@ -42,7 +42,7 @@ def move_image(image_file: Path, target_dir: Path) -> None:
 
     sidecar_file = image_file.with_suffix(".xmp")
     try:
-        sidecar_file.rename(target_dir / sidecar_file.name)
+        move_file(sidecar_file, target_dir)
     except FileNotFoundError:
         pass  # Do nothing if a sidecar file does not exist.
 
