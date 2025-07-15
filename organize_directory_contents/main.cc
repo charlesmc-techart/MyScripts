@@ -59,17 +59,18 @@ int main(const int argc, const char* argv[]) {
     // Utilize short-circuiting by checking if the file extension is "xmp" only
     // at the end.
     auto file_ext{dir_path.extension().string()};
-    if (!file_ext.empty()) {
+    if (file_ext.empty()) {
       continue;
     }
 
     file_ext = file_ext.substr(1);
     for (auto& c : file_ext) {
-      std::tolower(c);
+      c = std::tolower(c);
     }
 
     if (file_ext == "xmp") {
       xmp_files.push_back(dir_path);
+      continue;
     }
 
     std::filesystem::path target_dir;
@@ -106,15 +107,13 @@ void read_targets_from_file(
   std::ifstream file{config_file};
 
   std::string line;
-  const std::regex pattern{R"(^\s*?(\w+?)\s*?=\s*?(\w+?)\s*?$)"};
+  const std::regex pattern{R"(^\s*?(\w+?)\s*?=\s*?(\w+?\/?\w+?)\s*?$)"};
   std::smatch match;
 
   while (std::getline(file, line)) {
     if (line.empty() || line[0] == '#') {
       continue;
     }
-
-    std::cout << "Hi\n";
 
     std::regex_search(line, match, pattern);
     if (match.size() < 3) {
@@ -127,6 +126,7 @@ void read_targets_from_file(
     out_dirs.insert(value);
     out_targets[key] = value;
   }
+  out_dirs.insert(MISC_DIR);
 }
 
 void move_file(const std::filesystem::path& file,
