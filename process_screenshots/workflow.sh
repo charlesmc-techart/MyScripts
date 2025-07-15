@@ -18,3 +18,7 @@ fi
 mkfifo $PIPE && trap 'rm $PIPE' EXIT
 
 ~/.local/bin/process_screenshots ~SCREENSHOTS_DIR ~TAG_FILES_DIR/charlesmc.args ~TAG_FILES_DIR/screenshot.args
+
+if (( $? == 0 )); then
+    mv ~SCREENSHOTS_DIR/*.*(.) ${~SCREENSHOTS_DIR:h}
+fi
