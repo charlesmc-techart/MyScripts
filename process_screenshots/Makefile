@@ -1,8 +1,7 @@
-workflow_dir = ~/Library/Workflows/Applications/Folder\ Actions
-all: ${workflow_dir}/process_screenshots.workflow ~/.local/bin/process_screenshots
+all: main workflow
 
-${workflow_dir}/process_screenshots.workflow: process_screenshots.workflow
-	install -v -l as $< ${workflow_dir}
+main: main.sh
+	install -v -l as $< ~/.local/bin/process_screenshots
 
-~/.local/bin/process_screenshots: ./main.sh
-	install -v -l as $< $@
+workflow: process_screenshots.workflow
+	install -v -l as $< ~/Library/Workflows/Applications/Folder\ Actions/$<
