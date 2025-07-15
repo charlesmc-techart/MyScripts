@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh -f
 # A Folder Action script for preparing `main.sh`
 
-readonly SCREENSHOTS_DIR=~/MyFiles/Pictures/Screenshots/.tmp
-readonly PIPE=${~SCREENSHOTS_DIR:h}/ps
+readonly SCREENSHOTS_DIR=~/MyFiles/Pictures/Screenshots
+readonly EXECUTABLE_NAME=process_screenshots
+readonly PIPE=${~SCREENSHOTS_DIR}/${EXECUTABLE_NAME}
 readonly TAG_FILES_DIR=~/.config/exiftool
 
 ################################################################################
@@ -17,8 +18,8 @@ fi
 # executes the rest of the script body
 mkfifo $PIPE && trap 'rm $PIPE' EXIT
 
-~/.local/bin/process_screenshots ~SCREENSHOTS_DIR ~TAG_FILES_DIR/charlesmc.args ~TAG_FILES_DIR/screenshot.args
-
-if (( $? == 0 )); then
-    mv ~SCREENSHOTS_DIR/*.*(.) ${~SCREENSHOTS_DIR:h}
-fi
+~/.local/bin/process_screenshots\
+    -i ~SCREENSHOTS_DIR/.tmp\
+    -o ~SCREENSHOTS_DIR\
+    ~TAG_FILES_DIR/charlesmc.args\
+    ~TAG_FILES_DIR/screenshot.args
