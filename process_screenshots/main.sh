@@ -21,22 +21,26 @@ input_dir='.'
 output_dir='.'
 declare -Ua tag_files
 
+# TODO: Maybe switch to `zparseopts` eventually
 while (( $# > 0 )); do
     case $1 in
         -i | --input)
-        error_if_not_dir Input $2
+        error_if_not_dir 'Input' $2
         input_dir=$2
         shift 1
         ;;
+
         -o | --output)
-        error_if_not_dir Output $2
+        error_if_not_dir 'Output' $2
         output_dir=$2
         shift 1
         ;;
+
         *.args)
         tag_files+="-@ $1"
         shift
         ;;
+
         *)
         shift
         ;;
