@@ -51,6 +51,7 @@ def move_image(image_file: Path, target_dir: Path) -> None:
 def main(root_dir: Path, config_file: Path) -> None:
 
     subdirs, target_dirs = read_targets_from_file(config_file)
+
     for subdir in subdirs:
         (root_dir / subdir).mkdir(parents=True, exist_ok=True)
 
