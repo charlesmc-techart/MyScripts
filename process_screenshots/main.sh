@@ -61,7 +61,8 @@ readonly hardware=$(system_profiler SPHardwareDataType | grep $search_str | sed 
     "-AllDates<$new_datetime_pattern"         "-OffsetTime*=$timezone"\
     '-MaxAvailHeight<ImageHeight'             '-MaxAvailWidth<ImageWidth'\
     '-RawFileName<FileName'                   '-PreservedFileName<FileName'\
-    "-Software=$(sw_vers --productVersion)"   "-Model=$hardware"
+    "-Software=$(sw_vers --productVersion)"   "-Model=$hardware"\
+    $=tag_files
 
 if (( $? == 0 )); then
     tmp_dir=$(mktemp -d -t cmc)
