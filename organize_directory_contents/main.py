@@ -1,6 +1,7 @@
 #!/usr/bin/env python3 -OO
 """A CLI script to organize the contents of a directory"""
 
+
 from argparse import ArgumentParser
 from pathlib import Path
 
@@ -89,15 +90,10 @@ if __name__ == "__main__":
     parser = ArgumentParser(prog="Organize Directory", description=__doc__)
     parser.add_argument("dir", type=Path, help="the directory to organize")
     parser.add_argument(
-        "-c",
-        "--config",
+        "config",
         type=Path,
-        help="a map between file extension and its destination",
+        help="a map between a file extension and its destination",
     )
     args = parser.parse_args()
 
-    config_file = args.config
-    if not config_file:
-        config_file = Path(__file__).with_name("paths.cfg")
-
-    main(args.dir, config_file)
+    main(args.dir, args.config)
