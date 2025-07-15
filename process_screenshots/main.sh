@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh -f
 # A script for renaming screenshots and adding certain metadata
 
+readonly HOMEBREW_DIR=/opt/homebrew/bin
+
+# Exit with 1 if the arg is not a directory
+# $1: "Input" or "Output"
+# $2: An input or output directory
 function error_if_not_dir {
     if [[ ! -d $2 ]]; then
         echo "$1 is not a directory: $2" >&2
@@ -56,12 +61,12 @@ readonly timezone=$(date +%z)
 readonly search_str='Model Name:'
 readonly hardware=$(system_profiler SPHardwareDataType | grep $search_str | sed -E "s/ *${search_str} ?//")
 
-/opt/homebrew/bin/exiftool -P -struct         "-directory=$output_dir"\
-    ./$~orig_filename_pattern                 "-Filename<$new_filename_pattern"\
-    "-AllDates<$new_datetime_pattern"         "-OffsetTime*=$timezone"\
-    '-MaxAvailHeight<ImageHeight'             '-MaxAvailWidth<ImageWidth'\
-    '-RawFileName<FileName'                   '-PreservedFileName<FileName'\
-    "-Software=$(sw_vers --productVersion)"   "-Model=$hardware"\
+"$~HOMEBREW_DIR/exiftool" -P -struct         "-directory=$output_dir"\
+    $~orig_filename_pattern                  "-Filename<$new_filename_pattern"\
+    "-AllDates<$new_datetime_pattern"        "-OffsetTime*=$timezone"\
+    '-MaxAvailHeight<ImageHeight'            '-MaxAvailWidth<ImageWidth'\
+    '-RawFileName<FileName'                  '-PreservedFileName<FileName'\
+    "-Software=$(sw_vers --productVersion)"  "-Model=$hardware"\
     $=tag_files
 
 if (( $? == 0 )); then
