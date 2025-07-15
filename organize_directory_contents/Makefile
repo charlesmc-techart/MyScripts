@@ -10,7 +10,7 @@ cc: main.cc
 test_cc: main.cc
 	${CXX} -g -o $@ $<
 	./$@ ./test ./paths.cfg
-	rm ./$@
+	rm -r ./$@ ./$@.dSYM
 
 py: main.py
 	install -v -l as $< ${bin}
