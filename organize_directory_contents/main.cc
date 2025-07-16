@@ -30,6 +30,7 @@ void move_image(const std::filesystem::path&, const std::filesystem::path&);
 
 // main
 
+/// \todo Maybe a better way of handling CLI args?
 int main(const int argc, const char* argv[]) {
   if (argc < 3) {
     std::cerr << "Error: Must supply a directory and a config file\n";
