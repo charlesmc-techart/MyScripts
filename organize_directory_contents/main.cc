@@ -111,7 +111,7 @@ void read_targets_from_file(
     std::ifstream file{config_file};
 
     std::string line;
-    const std::regex pattern{R"(^\s*?(\w+?)\s*?=\s*?(\w+?\/?\w+?)\s*?$)"};
+    const std::regex pattern{R"(^\s*?(\w+?)\s*?=\s*?(\w+?[\/|\\]?\w+?)\s*?$)"};
     std::smatch match;
 
     while (std::getline(file, line)) {
