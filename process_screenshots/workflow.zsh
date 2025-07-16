@@ -1,12 +1,12 @@
 #!/usr/bin/env zsh -f
-# A Folder Action script for preparing `main.sh`
+# A script for preparing `process_screenshots/main.sh`. It will be sourced by a
+# Folder Action
 
 readonly SCREENSHOTS_DIR=~/MyFiles/Pictures/Screenshots
-readonly TAG_FILES_DIR=~/.config/exiftool
+readonly PIPE=~SCREENSHOTS_DIR/process_screenshots
 
-readonly EXECUTABLE_DIR=~/.local/bin
-readonly EXECUTABLE_NAME=process_screenshots
-readonly PIPE=~SCREENSHOTS_DIR/$EXECUTABLE_NAME
+readonly EXECUTABLE_DIR=~/.local/bin/process_screenshots
+readonly TAG_FILES_DIR=~/.config/exiftool
 
 ################################################################################
 
@@ -20,6 +20,5 @@ fi
 # executes the rest of the script body
 mkfifo ~PIPE && trap 'rm ~PIPE' EXIT
 
-~EXECUTABLE_DIR/$EXECUTABLE_NAME\
-    -i ~SCREENSHOTS_DIR/.tmp             -o ~SCREENSHOTS_DIR\
-    ~TAG_FILES_DIR/charlesmc.args        ~TAG_FILES_DIR/screenshot.args
+~EXECUTABLE_DIR/main -i ~SCREENSHOTS_DIR/.tmp -o ~SCREENSHOTS_DIR\
+    ~TAG_FILES_DIR/charlesmc.args ~TAG_FILES_DIR/screenshot.args
