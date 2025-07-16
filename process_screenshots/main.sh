@@ -50,7 +50,7 @@ done
 cd ~input_dir
 
 readonly orig_filename_pattern='*2<-1><-9><-9>-<-1><-9>-<-3><-9>*<-2><-9>.<-5><-9>.<-5><-9>*.*(.)'
-if [[ ! $(ls $~orig_filename_pattern) ]] 2>/dev/null; then
+if [[ ! $(ls $~orig_filename_pattern) ]]; then
     echo "No screenshots to process: $input_dir" >&2
     exit 2
 fi
