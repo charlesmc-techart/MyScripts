@@ -61,7 +61,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>source ~/MyFiles/Programming/bin/process_screenshots/workflow.sh</string>
+					<string>source ~/MyFiles/Programming/bin/process_screenshots/workflow.zsh</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
