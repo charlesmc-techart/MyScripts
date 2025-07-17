@@ -21,9 +21,7 @@ int main(const int argc, const char* argv[])
     const std::filesystem::path root_dir{argv[1]};
 
     std::filesystem::path targets_file;
-    if (argc < 3) {
-        targets_file = root_dir / "targets.cfg";
-    }
+    if (argc < 3) { targets_file = root_dir / "targets.cfg"; }
     else {
         targets_file = argv[2];
     }
@@ -54,8 +52,7 @@ int main(const int argc, const char* argv[])
 
         auto file_ext{dir_path.extension().string()};
         std::filesystem::path target_dir;
-        if (!file_ext.empty()) { target_dir = cmc::MISC_DIR; }
-
+        if (file_ext.empty()) { target_dir = cmc::MISC_DIR; }
         else {
             file_ext = file_ext.substr(1);
             for (auto& c: file_ext) { c = static_cast<char>(std::tolower(c)); }
@@ -76,7 +73,6 @@ int main(const int argc, const char* argv[])
         if (target_dir == images_dir || target_dir == images_raw_dir) {
             cmc::move_image(dir_path, root_dir / target_dir);
         }
-
         else {
             cmc::move_file(dir_path, root_dir / target_dir);
         }
