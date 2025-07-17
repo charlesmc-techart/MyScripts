@@ -7,11 +7,15 @@
 
 namespace cmc {
 
+    // move_file
+
     void move_file(const std::filesystem::path& file,
                    const std::filesystem::path& target_dir)
     {
         std::filesystem::rename(file, target_dir / file.filename());
     }
+
+    // move_image
 
     void move_image(const std::filesystem::path& image_file,
                     const std::filesystem::path& target_dir)

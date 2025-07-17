@@ -10,10 +10,12 @@
 namespace cmc {
 
     /// \brief Move `file` into `target_dir`.
-    void move_file(const std::filesystem::path&, const std::filesystem::path&);
+    void move_file(const std::filesystem::path& file,
+                   const std::filesystem::path& target_dir);
 
     /// \brief Move an image and its sidecar file to `target_dir`.
-    void move_image(const std::filesystem::path&, const std::filesystem::path&);
+    void move_image(const std::filesystem::path& file,
+                    const std::filesystem::path& target_dir);
 
 } // namespace cmc
 
