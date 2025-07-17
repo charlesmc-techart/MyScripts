@@ -1,4 +1,7 @@
+//
+// Charles Mesa Cayobit
 // A CLI program to organize the contents of a directory.
+//
 
 #include "move_file.hh"
 #include "read_targets_file.hh"
@@ -19,7 +22,7 @@ int main(const int argc, const char* argv[])
 
     std::filesystem::path targets_file;
     if (argc < 3) {
-        targets_file = "~/.config/organize_directory_contents.cfg";
+        targets_file = root_dir / "targets.cfg";
     }
     else {
         targets_file = argv[2];
@@ -34,6 +37,10 @@ int main(const int argc, const char* argv[])
     // `move_image()` will move an image's existing sidecar file alongside the
     // image, so defer processing XMP files to the end.
     std::vector<std::filesystem::path> xmp_files;
+
+    // Ensures that if the targets file is in the same directory as the root, it
+    // will be skipped
+    subdirs.insert(targets_file.filename());
 
     const auto& images_dir{target_dirs["jpg"s]};
     const auto& images_raw_dir{target_dirs["dng"s]};
