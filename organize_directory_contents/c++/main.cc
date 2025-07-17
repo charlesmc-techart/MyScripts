@@ -11,15 +11,21 @@
 /// \todo Maybe a better way of handling CLI args?
 int main(const int argc, const char* argv[])
 {
+    if (argc < 2) {
+        std::cerr << "Must supply a directory to organize\n";
+        return EXIT_FAILURE;
+    }
+    const std::filesystem::path root_dir{argv[1]};
+
+    std::filesystem::path targets_file;
     if (argc < 3) {
-        std::cerr << "Error: Must supply a directory and a config file\n";
-        return 1;
+        targets_file = "~/.config/organize_directory_contents.cfg";
+    }
+    else {
+        targets_file = argv[2];
     }
 
-    const std::filesystem::path root_dir{argv[1]};
-    const std::filesystem::path config_file{argv[2]};
-
-    auto [subdirs, target_dirs]{cmc::read_targets_file(config_file)};
+    auto [subdirs, target_dirs]{cmc::read_targets_file(targets_file)};
 
     for (const auto& subdir: subdirs) {
         std::filesystem::create_directories(root_dir / subdir);
