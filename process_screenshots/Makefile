@@ -14,9 +14,7 @@ workflow: workflow.zsh $(SCRIPT_NAME).workflow dir
 	chmod +x $(BIN_PATH)/$<
 
 dir:
-	if [[ -d $(BIN_PATH) ]]; then\
-		exit 0;\
-	elif [[ -e $(BIN_PATH) ]]; then\
-		rm $(BIN_PATH);\
+	if [[ -d $(BIN_PATH) ]]; then exit 0;\
+	elif [[ -e $(BIN_PATH) ]]; then rm $(BIN_PATH);\
 	fi;\
 	mkdir $(BIN_PATH)

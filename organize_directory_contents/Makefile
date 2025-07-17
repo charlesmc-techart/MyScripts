@@ -1,14 +1,11 @@
-bin_path := ~/.local/bin/organize_directory_contents
+BIN_PATH := ~/.local/bin/organize_directory_contents
 
 CXX      := clang++ -std=c++26 -Wall -Wextra -Wpedantic -O3 -fcolor-diagnostics
 
-all: build-c++ install-config
-
-build-c++: $(bin_path)
-$(bin_path): c++/main.o c++/move_file.o c++/read_targets_file.o
-	if [[ -L $(bin_path) ]]; then rm $(bin_path); fi
-	$(CXX) -o $(bin_path) $^
-
+build-c++: $(BIN_PATH)
+$(BIN_PATH): c++/main.o c++/move_file.o c++/read_targets_file.o
+	if [[ -L $(BIN_PATH) ]]; then rm $(BIN_PATH); fi
+	$(CXX) -o $(BIN_PATH) $^
 
 c++/%.o: c++/%.cc
 	$(CXX) -o $@ -c $<
@@ -32,9 +29,6 @@ clean-test:
 	rm -rf c++/$(test_file) c++/$(test_dir)
 
 
-link-py: main.py
-	install -v -l as $< $(bin_path)
-
-install-config: ~/.config/organize_directory_contents.cfg
-~/.config/organize_directory_contents.cfg: targets.cfg
-	if [[ ! -L  $@ ]]; then install -v -l as $<; fi
+link-py: python/main.py
+	install -v -l as $< $(BIN_PATH)
+	chmod +x $(BIN_PATH)
