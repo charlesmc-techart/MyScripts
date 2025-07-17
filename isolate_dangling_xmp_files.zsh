@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh -f
 # A script for deleting sidecar files not without an image
 
+# todo: Add verbosity settings?
+
 if (( $# < 1 )); then
     echo 'Must provide a directory to search' >&2
     exit 1
