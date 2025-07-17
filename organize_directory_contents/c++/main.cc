@@ -1,19 +1,12 @@
 // A CLI program to organize the contents of a directory.
 
+#include "move_file.hh"
 #include "read_targets_file.hh"
 #include <filesystem>
 #include <iostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
-
-/// \brief Move `file` into `target_dir`.
-void move_file(const std::filesystem::path&, const std::filesystem::path&);
-
-/// \brief Move an image and its sidecar file to `target_dir`.
-void move_image(const std::filesystem::path&, const std::filesystem::path&);
-
-// main
 
 /// \todo Maybe a better way of handling CLI args?
 int main(const int argc, const char* argv[])
@@ -66,43 +59,20 @@ int main(const int argc, const char* argv[])
         }
 
         if (target_dir == images_dir || target_dir == images_raw_dir) {
-            move_image(dir_path, root_dir / target_dir);
+            cmc::move_image(dir_path, root_dir / target_dir);
         }
 
         else {
-            move_file(dir_path, root_dir / target_dir);
+            cmc::move_file(dir_path, root_dir / target_dir);
         }
     }
 
     for (const auto& xmp_file: xmp_files) {
         try {
-            move_file(xmp_file, root_dir / cmc::MISC_DIR);
+            cmc::move_file(xmp_file, root_dir / cmc::MISC_DIR);
         }
         catch (const std::filesystem::filesystem_error&) {
             // Do nothing if the image sidecar file had already been moved.
         }
-    }
-}
-
-// Implementation details below
-
-void move_file(const std::filesystem::path& file,
-               const std::filesystem::path& target_dir)
-{
-    std::filesystem::rename(file, target_dir / file.filename());
-}
-
-void move_image(const std::filesystem::path& image_file,
-                const std::filesystem::path& target_dir)
-{
-    move_file(image_file, target_dir);
-
-    const auto& sidecar_file{const_cast<std::filesystem::path&>(image_file)
-                                     .replace_extension("xmp")};
-    try {
-        move_file(sidecar_file, target_dir);
-    }
-    catch (const std::filesystem::filesystem_error&) {
-        // Do nothing if a sidecar file does not exist.
     }
 }

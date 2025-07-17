@@ -4,7 +4,7 @@ CXX      := clang++ -std=c++26 -Wall -Wextra -Wpedantic -O3 -fcolor-diagnostics
 
 all: build cfg
 
-build: c++/main.o c++/read_targets_file.o
+build: c++/main.o c++/move_file.o c++/read_targets_file.o
 	if [[ -L $(bin_path) ]]; then\
   		rm $(bin_path);\
   	fi
@@ -16,7 +16,7 @@ c++/%.o: c++/%.cc
 
 test_dir  := test_d
 test_file := test_f
-test: c++/main.o c++/read_targets_file.o
+test: c++/main.o c++/move_file.o c++/read_targets_file.o
 	$(CXX) -o $(test_file) $^
 	mkdir -p ./$(test_dir)
 
