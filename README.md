@@ -19,3 +19,8 @@ intended to be sourced by a MacOS Folder Action.
 
 A script that will recursively search a directory for XMP files that don't have
 corresponding image files, then move them to a new directory.
+
+## `lowercase_file_extensions.zsh`
+
+A script that will recursively search a directory for files with non-lowercase
+extensions, then rename them.
