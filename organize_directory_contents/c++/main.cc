@@ -53,22 +53,24 @@ int main(const int argc, const char* argv[])
         }
 
         auto file_ext{dir_path.extension().string()};
-        if (file_ext.empty()) { continue; }
-
-        file_ext = file_ext.substr(1);
-        for (auto& c: file_ext) { c = static_cast<char>(std::tolower(c)); }
-
-        if (file_ext == "xmp") {
-            xmp_files.push_back(dir_path);
-            continue;
-        }
-
         std::filesystem::path target_dir;
-        try {
-            target_dir = target_dirs.at(file_ext);
-        }
-        catch (const std::out_of_range&) {
-            target_dir = cmc::MISC_DIR;
+        if (!file_ext.empty()) { target_dir = cmc::MISC_DIR; }
+
+        else {
+            file_ext = file_ext.substr(1);
+            for (auto& c: file_ext) { c = static_cast<char>(std::tolower(c)); }
+
+            if (file_ext == "xmp") {
+                xmp_files.push_back(dir_path);
+                continue;
+            }
+
+            try {
+                target_dir = target_dirs.at(file_ext);
+            }
+            catch (const std::out_of_range&) {
+                target_dir = cmc::MISC_DIR;
+            }
         }
 
         if (target_dir == images_dir || target_dir == images_raw_dir) {
