@@ -29,6 +29,6 @@ clean-test:
 	rm -rf c++/$(test_file) c++/$(test_dir)
 
 
-link-py: python/main.py
+link-py: python
 	install -v -l as $< $(BIN_PATH)
 	chmod +x $(BIN_PATH)
