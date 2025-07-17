@@ -20,8 +20,8 @@ namespace cmc {
     static const std::filesystem::path MISC_DIR{"Misc"s};
 
     /// \brief Create a targets map from a file.
-    /// \param targets_file the file containing the mapping
-    /// corresponding file's destination
+    /// \param targets_file the file containing the mapping corresponding file's
+    /// destination
     auto read_targets_file(const std::filesystem::path& targets_file)
             -> std::pair<Directories, Targets>;
 

@@ -4,20 +4,20 @@ CXX      := clang++ -std=c++26 -Wall -Wextra -Wpedantic -O3 -fcolor-diagnostics
 
 all: build cfg
 
-build: main.o read_targets_file.o
+build: c++/main.o c++/read_targets_file.o
 	if [[ -L $(bin_path) ]]; then\
   		rm $(bin_path);\
   	fi
 
 	$(CXX) -o $(bin_path) $^
 
-%.o: %.cc
-	$(CXX) -c $^
+c++/%.o: c++/%.cc
+	$(CXX) -o $@ -c $<
 
 test_dir  := test_d
 test_file := test_f
-test: main.o read_targets_file.o
-	$(CXX) -o $(test_file) ./$^
+test: c++/main.o c++/read_targets_file.o
+	$(CXX) -o $(test_file) $^
 	mkdir -p ./$(test_dir)
 
 	for file in blend blend1 ma mb abc fbx obj zip 7z tar py cpp h hpp s js gs jpg png orf dng xls txt mov mp4 mp3 xmp; do\
@@ -27,7 +27,7 @@ test: main.o read_targets_file.o
 	./$(test_file) ./$(test_dir) ./targets.cfg
 
 clean:
-	rm -rf ./$(test_file) ./$(test_dir) ./*.o
+	rm -rf ./$(test_file) ./$(test_dir) ./c++/*.o
 
 
 py: main.py
