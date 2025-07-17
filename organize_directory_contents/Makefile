@@ -26,8 +26,11 @@ test: c++/main.o c++/move_file.o c++/read_targets_file.o
 
 	./$(test_file) ./$(test_dir) ./targets.cfg
 
-clean:
-	rm -rf ./$(test_file) ./$(test_dir) ./c++/*.o
+clean-obj:
+	rm -rf ./**/*.o
+
+clean-test:
+	rm -rf ./$(test_file) ./$(test_dir)
 
 
 py: main.py
