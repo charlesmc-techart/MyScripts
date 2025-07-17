@@ -1,7 +1,9 @@
 #!/usr/bin/env python3 -OO
 """A CLI script to organize the contents of a directory"""
 
+
 __author__ = "Charles Mesa Cayobit"
+
 
 from argparse import ArgumentParser
 from pathlib import Path
