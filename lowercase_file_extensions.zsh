@@ -12,18 +12,42 @@ if (( $# < 1 )); then
     exit 1
 fi
 
-cd "$dir"
-echo "Searching: '${dir}'"
+is_verbose=
+dir=
+while (( $# > 0 )); do
+    case $1 in
+    -h | --help   )
+        show_help
+        exit
+    ;;
 
-for file in ./**/*.*(.); do
-    extension=$file:e
-    if [[ $extension == $extension:l ]]; then
-        continue
-    fi
+    -v | --verbose)
+        is_verbose=-v
+    ;;
 
-    basename="$file:t"
-    new_name="${basename:r}.${extension:l}"
+    -* | --*)
+        echo "Invalid option: $1"
+        exit 2
+    ;;
 
-    mv "$file" "${file/${basename}/${new_name}}"
-    echo "${basename} -> ${new_name}"
+    *)
+        if [[ -d "$1" ]]; then
+            dir="$1"
+            break
+        else
+            echo "Invalid argument: $1"
+            exit 2
+        fi
+    ;;
+    esac
+    shift
 done
+
+if [[ ! $dir ]]; then
+    echo No directory >&2
+    exit 1
+fi
+
+cd $dir || exit $?
+autoload zmv || exit $?
+zmv $is_verbose '(**/)(*.)(*)' '$1$2${(L)3}'
