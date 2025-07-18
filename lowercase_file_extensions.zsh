@@ -1,14 +1,15 @@
 #!/usr/bin/env zsh -f
 # A script for converting file extensions to lowercase
 
-# todo: Add verbosity settings?
+function show_help {
+    echo 'Usage: lowercase_file_extensions [-v | --verbose, -h | --help ] [directory]' >&2
+}
 
-dir=.
-if [[ $1 && ! -d $1 ]]; then
-    echo "Not a directory: $1" >&2
+################################################################################
+
+if (( $# < 1 )); then
+    show_help
     exit 1
-else
-    dir=$1
 fi
 
 cd "$dir"
